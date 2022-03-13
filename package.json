@@ -4,7 +4,10 @@
   "description": "react+rust wasm app to split IP ranges and convert to/from decimals",
   "main": "src/index.jsx",
   "scripts": {
-    "dev": "webpack server"
+    "dev": "webpack server",
+    "build:wasm": "cargo build --target wasm32-unknown-unknown",
+    "build:bindgen": "wasm-bindgen target/wasm32-unknown-unknown/debug/ip_utilities.wasm --out-dir build",
+    "build": "npm run build:wasm && npm run build:bindgen && npx webpack"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@wasm-tool/wasm-pack-plugin": "^1.6.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.3",
     "html-webpack-plugin": "^5.5.0",
